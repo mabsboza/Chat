@@ -25,11 +25,10 @@
   <div class="row">
     <div class="col">
       <ul id="messagesList" class="mt-2">
-
       </ul>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js" integrity="sha512-oFOCo2/3DtjrJG4N27BjSLQWoiBv171sK6a+JiWjp/7agxC2nCUP358AqzxkBUb5jX8g6CYLPdSKQTbC0weCwA==" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
   <script>
     const clientSocket = io('http://localhost:8080');
     const form = document.querySelector('#chatForm');
@@ -39,8 +38,13 @@
     form.addEventListener('submit', (event) =>{
       event.preventDefault();
       const message = txtFieldMessage.value;
-      console.log(message);
+      clientSocket.emit('connection_server', { texto: message })
     });
+
+    clientSocket.on('connection_to_server_client', (data) => {
+      messagesList.innerHTML +=`<li>${data.texto}</li>`
+    });
+
     clientSocket.on('connection_server', (data) => {
       console.log(data);
       setTimeout(()=> {
