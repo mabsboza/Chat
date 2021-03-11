@@ -30,7 +30,7 @@
   </div>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const clientSocket = io('http://localhost:8080');
+    const clientSocket = io('https://chat-io-socket-server.herokuapp.com/');
     const form = document.querySelector('#chatForm');
     const messagesList = document.querySelector('#messagesList')
     const txtFieldMessage = document.querySelector('#txtmessage')
