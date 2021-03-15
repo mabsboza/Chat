@@ -39,6 +39,7 @@
       event.preventDefault();
       const message = txtFieldMessage.value;
       clientSocket.emit('connection_server', { texto: message })
+      document.getElementById('txtmessage').value = ''
     });
 
     clientSocket.on('connection_to_server_client', (data) => {
