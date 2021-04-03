@@ -22,8 +22,13 @@ class Server {
   middelware() {
     this.app.use(express.static(path.resolve(__dirname, '../public')));
     this.app.use(cors());
+
+    //Express server
     this.app.use(express.json());
+
+    //End points
     this.app.use('/api/login', require('../router/auth'));
+    this.app.use('/api/messages', require('../router/messages'));
   }
 
   configSockets() {
